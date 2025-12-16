@@ -478,10 +478,8 @@ export default function Page() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const storedBase = localStorage.getItem(API_BASE_KEY);
-    if (storedBase) {
-      setApiBase(storedBase);
-    }
+    // 항상 defaultApiBase 사용
+    setApiBase(defaultApiBase);
     const storedSession = loadStoredSession();
     if (storedSession) {
       setSession(storedSession);
