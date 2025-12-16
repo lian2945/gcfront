@@ -84,7 +84,7 @@ type ToastItem = {
   variant: 'success' | 'error';
 };
 
-const defaultApiBase = 'http://localhost:3000';
+const defaultApiBase = 'https://dongwook-server.jaehwan.kr';
 
 const createInitialCursor = (): CursorState => ({
   count: 10,

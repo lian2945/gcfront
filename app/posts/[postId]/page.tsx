@@ -38,7 +38,7 @@ type CommentItem = {
   createdAt: string;
 };
 
-const defaultApiBase = 'http://localhost:8080';
+const defaultApiBase = 'https://dongwook-server.jaehwan.kr';
 
 export default function PostDetailPage() {
   const router = useRouter();
