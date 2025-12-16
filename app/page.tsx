@@ -390,17 +390,16 @@ export default function Page() {
 
   const handleSignup = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!signupData.mail || !signupData.nickname || !signupData.password || !verificationCode) {
-      addToast('필수 정보를 모두 입력해 주세요.', 'error');
+    if (!signupData.nickname || !signupData.password) {
+      addToast('닉네임과 비밀번호를 입력해 주세요.', 'error');
       return;
     }
     try {
       await apiFetch('/auth/signup', null, apiBase, {
         method: 'POST',
         body: {
-          mailVerificationCode: verificationCode,
-          password: signupData.password,
           nickname: signupData.nickname,
+          password: signupData.password,
           profile: signupData.profile || null,
           description: signupData.description || null,
         },
@@ -409,6 +408,7 @@ export default function Page() {
       setSignupData({ mail: '', nickname: '', password: '', profile: '', description: '' });
       setVerificationCode('');
       setCodeSent(false);
+      setVerified(false);
       closeSignupModal();
     } catch (error) {
       addToast(error instanceof Error ? error.message : '회원가입 실패', 'error');
@@ -1023,41 +1023,11 @@ export default function Page() {
             </div>
             <form onSubmit={handleSignup} className="signup-form">
               <label>
-                이메일
-                <input
-                  type="email"
-                  value={signupData.mail}
-                  onChange={handleSignupInput('mail')}
-                  placeholder="example@domain.com"
-                  required
-                />
-              </label>
-              <label>
                 닉네임
                 <input
                   value={signupData.nickname}
                   onChange={handleSignupInput('nickname')}
                   placeholder="사용할 닉네임"
-                  required
-                />
-              </label>
-              <div className="verification-row">
-                <button
-                  type="button"
-                  className="pill ghost"
-                  onClick={sendVerificationEmail}
-                  disabled={!signupData.mail || !signupData.nickname}
-                >
-                  인증 코드 받기
-                </button>
-                {codeSent && <span className="verification-status">코드가 이메일로 전송되었습니다.</span>}
-              </div>
-              <label>
-                인증 코드
-                <input
-                  value={verificationCode}
-                  onChange={(event) => setVerificationCode(event.target.value)}
-                  placeholder="이메일로 받은 6자리 코드"
                   required
                 />
               </label>
