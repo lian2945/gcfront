@@ -60,7 +60,7 @@ export default function PostDetailPage() {
   }, []);
 
   const getApiBase = () => {
-    return localStorage.getItem(API_BASE_KEY) || defaultApiBase;
+    return defaultApiBase;
   };
 
   const loadPost = async () => {
