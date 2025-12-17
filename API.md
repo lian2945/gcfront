@@ -4,11 +4,6 @@
 
 ## 인증 / 사용자
 
-### `POST /auth/email/send`
-- 설명: 인증 코드를 발급하고 전달받은 이메일로 전송합니다.
-- Body: `{ "mail": "user@example.com", "nickname": "원하는닉네임" }`
-- 응답: `204 No Content`
-
 ### `POST /auth/signup`
 - 설명: 이메일 코드로 인증을 마친 이후 사용자 계정을 생성합니다.
 - Body:
